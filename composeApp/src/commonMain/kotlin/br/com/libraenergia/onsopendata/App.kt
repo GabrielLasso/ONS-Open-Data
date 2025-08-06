@@ -99,7 +99,7 @@ object S3Service {
             defaultPolicy {
                 ignoreUnknownChildren()
             }
-        }.decodeFromString<ListBucketResult>(response).also { println (it) }.let { response ->
+        }.decodeFromString<ListBucketResult>(response).let { response ->
             response.CommonPrefixes.map { it.Prefix }.map { FileOrDir.Dir(it) } +
                     response.Contents.map { it.Key }.map { FileOrDir.File(it) }
         }
